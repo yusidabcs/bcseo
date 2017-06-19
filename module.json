@@ -1,0 +1,25 @@
+{
+    "name": "Bcseo",
+    "alias": "bcseo",
+    "description": "",
+    "version": "v0.1",
+    "keywords": [],
+    "active": 1,
+    "order": 1,
+    "providers": [
+      "Modules\\Bcseo\\Providers\\BcseoServiceProvider",
+      "Modules\\Bcseo\\Providers\\RouteServiceProvider",
+      "Artesaos\\SEOTools\\Providers\\SEOToolsServiceProvider",
+      "Roumen\\Sitemap\\SitemapServiceProvider"
+    ],
+    "aliases":{
+
+      "SEOMeta" : "Artesaos\\SEOTools\\Facades\\SEOMeta",
+      "OpenGraph" : "Artesaos\\SEOTools\\Facades\\OpenGraph",
+      "Twitter" : "Artesaos\\SEOTools\\Facades\\TwitterCard",
+      "SEO" : "Artesaos\\SEOTools\\Facades\\SEOTools"
+    },
+    "files": [
+        "composers.php"
+    ]
+}
