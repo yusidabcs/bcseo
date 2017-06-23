@@ -48,11 +48,32 @@ Route::get('sitemap-generator', function()
 
     foreach ($tags as $tag)
     {
-        $sitemap_tags->add($tag->slug, null, '0.5', 'weekly');
+        $sitemap_tags->add(url('our-villas?category='.$tag->id), null, '0.5', 'monthly');
     }
 
     // create file sitemap-tags.xml in your public folder (format, filename)
     $sitemap_tags->store('xml','sitemap-villa-categories');
+
+
+    // create sitemap
+    $sitemap_blog = App::make("sitemap");
+
+    // add items
+    $blogs = Modules\Blog\Entities\Post::get();
+
+    foreach ($blogs as $item)
+    {
+        $main_url = LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(), url('blog/posts/'.$item->slug));
+        $translations = [];
+        foreach(LaravelLocalization::getSupportedLocales() as $key => $locale)
+        {
+            $translations[] = ['language' => $key, 'url' => LaravelLocalization::getLocalizedURL($key, url('blog/posts/'.$item->slug))];
+        }
+        $sitemap_blog->add($main_url, $item->updated_at, 1, 'daily', [], null, $translations);
+    }
+
+    // create file sitemap-tags.xml in your public folder (format, filename)
+    $sitemap_blog->store('xml','sitemap-blogs');
 
     // create sitemap index
     $sitemap = App::make ("sitemap");
@@ -61,6 +82,7 @@ Route::get('sitemap-generator', function()
     $sitemap->addSitemap(URL::to('sitemap-pages.xml'),\Carbon\Carbon::now());
     $sitemap->addSitemap(URL::to('sitemap-villas.xml'),\Carbon\Carbon::now());
     $sitemap->addSitemap(URL::to('sitemap-villa-categories.xml'),\Carbon\Carbon::now());
+    $sitemap->addSitemap(URL::to('sitemap-blogs.xml'),\Carbon\Carbon::now());
 
     // create file sitemap.xml in your public folder (format, filename)
     $sitemap->store('sitemapindex','sitemap');

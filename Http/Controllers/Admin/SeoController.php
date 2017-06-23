@@ -30,23 +30,19 @@ class SeoController extends AdminBaseController
     {
         //$seos = $this->seo->all();
 
-        try
-        {
+        if(File::exists(public_path().'/robots.txt')){
             $robots = File::get(public_path().'/robots.txt');
-        }
-        catch (Illuminate\Filesystem\FileNotFoundException $exception)
-        {
+        }else{
             $robots = '';
         }
 
-        try
-        {
+        if(File::exists(public_path().'/.htaccess')){
             $htaccess = File::get(public_path().'/.htaccess');
-        }
-        catch (Illuminate\Filesystem\FileNotFoundException $exception)
-        {
+        }else{
             $htaccess = '';
         }
+
+    
         return view('bcseo::admin.seos.index', compact('robots','htaccess'));
     }
 
