@@ -20,6 +20,7 @@
       "SEO" : "Artesaos\\SEOTools\\Facades\\SEOTools"
     },
     "files": [
-        "composers.php"
+        "composers.php",
+        "helpers.php"
     ]
 }

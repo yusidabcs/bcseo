@@ -30,21 +30,15 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
     public function extendWith(Menu $menu)
     {
         $menu->group(trans('core::sidebar.content'), function (Group $group) {
-            $group->item(trans('bcseo::abcs.title.abcs'), function (Item $item) {
+            $group->item(trans('bcseo::seos.title.seos'), function (Item $item) {
+               
+                $item->weight(11);
                 $item->icon('fa fa-copy');
-                $item->weight(10);
+                $item->append('admin.bcseo.seo.create');
+                $item->route('admin.bcseo.seo.index');
                 $item->authorize(
-                     /* append */
+                    $this->auth->hasAccess('bcseo.seos.index')
                 );
-                $item->item(trans('bcseo::seos.title.seos'), function (Item $item) {
-                    $item->icon('fa fa-copy');
-                    $item->weight(0);
-                    $item->append('admin.bcseo.seo.create');
-                    $item->route('admin.bcseo.seo.index');
-                    $item->authorize(
-                        $this->auth->hasAccess('bcseo.seos.index')
-                    );
-                });
 // append
 
             });

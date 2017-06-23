@@ -7,8 +7,7 @@ View::composer('*', function($view)
     if(isset($data['page'])){
         $obj = $data['page'];
     }
-
-    if(isset($data['villa'])){
+    else if(isset($data['villa'])){
         $obj = $data['villa'];
     }
 

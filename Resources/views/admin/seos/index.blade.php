@@ -32,7 +32,7 @@
                                 {!! Form::open(['url' => route('admin.bcseo.seo.store'), 'method' => 'post']) !!}
                                     <div class="box-body">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Robots</label>
+                                            <label for="exampleInputEmail1">Meta Robots</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1" value="{{ setting('bcseo::robots') }}" name="bcseo::robots">
                                         </div>
                                         <div class="form-group">
@@ -40,9 +40,23 @@
                                             <input type="text" class="form-control" id="exampleInputPassword1" value="{{ setting('bcseo::google-site-verifivation') }}" name="bcseo::google-site-verifivation">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Locale</label>
+                                            <label for="exampleInputPassword1">Meta Locale</label>
                                             <input type="text" class="form-control" id="exampleInputPassword1" value="{{ setting('bcseo::locale') }}" name="bcseo::locale">
                                         </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label for="exampleInputPassword1">Company or person</label>
+                                                <p>This data is shown as metadata in your site. It is intended to appear in Google's Knowledge Graph. You can be either a company, or a person, choose either:</p>
+                                                <select class="form-control " name="bcseo::company_or_person" required="">
+                                                    <option value="">Choose whether you're a company or person</option>
+                                                    <option value="company" {{ setting('bcseo::company_or_person') == 
+                                                    'company' ? 'selected="selected"' : '' }}>Company</option>
+                                                    <option value="person" {{ setting('bcseo::company_or_person') == 
+                                                    'person' ? 'selected="selected"' : '' }}>Person</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                     <!-- /.box-body -->
                                     <div class="box-footer">
