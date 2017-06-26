@@ -9,10 +9,10 @@ function bcs_seo()
     {
     	$html = $html.'<script type="application/ld+json">
     {
-      "@context": "http://schema.org",
+      "@context": "http:\/\/schema.org",
       "@type": "WebSite",
       "@id": "#website",
-      "url": "'.url('').'",
+      "url": "'.str_replace('/','\/',url('')).'",
       "name": "'.setting('core::site-name').'",
     }
     </script>
@@ -21,11 +21,11 @@ function bcs_seo()
     {
         "@context":"http:\/\/schema.org",
         "@type":"'.setting('bcseo::company_or_person').'",
-        "url":"'.url('').'",
+        "url": "'.str_replace('/','\/',url('')).'",
         "sameAs":[],
         "@id":"#'.setting('bcseo::company_or_person').'",
         "name":"'. setting('core::site-name') .'",
-        "logo":"'. setting('core::logo') .'"
+        "logo":"'. str_replace('/','\/',setting('core::logo')) .'"
     }
     </script>';	
     }
@@ -33,3 +33,4 @@ function bcs_seo()
 
     return preg_replace( "/\r|\n/", "", $html );
 }
+
