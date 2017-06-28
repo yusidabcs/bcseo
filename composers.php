@@ -18,7 +18,7 @@ View::composer('*', function($view)
         SEOMeta::setTitle($title);
         SEOMeta::setDescription($description);
         SEOMeta::addKeyword($obj->meta_keyword);
-        SEOMeta::addMeta('google-site-verification',Setting::get('bcseo::google-site-verification'));
+        SEOMeta::addMeta('google-site-verification',setting('bcseo::google-site-verification'));
         SEOMeta::addMeta('robots',Setting::get('bcseo::robots'));
 
         OpenGraph::setTitle($title);
