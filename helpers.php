@@ -2,7 +2,6 @@
 
 function bcs_seo()
 {
-
     $html = SEO::generate();
 
     if(Route::currentRouteName() == 'homepage')
@@ -40,4 +39,3 @@ function bcs_seo()
 
     return preg_replace( "/\r|\n/", "", $html );
 }
-
