@@ -55,12 +55,12 @@
                                                     <option value="">Choose whether you're a company or person</option>
                                                     <option value="organization" {{ setting('bcseo::company_or_person') ==
                                                     'organization' ? 'selected="selected"' : '' }}>Company</option>
-                                                    <option value="person" {{ setting('bcseo::company_or_person') == 
+                                                    <option value="person" {{ setting('bcseo::company_or_person') ==
                                                     'person' ? 'selected="selected"' : '' }}>Person</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                     <!-- /.box-body -->
                                     <div class="box-footer">
@@ -98,7 +98,29 @@
                                 cooming soon
                             </div>
                             <div class="tab-pane" id="preview">
-                                cooming soon
+                                <div class="form-group">
+                                    <label for="default">Default</label>
+                                    <input type="text" name="default" class="form-control" value="http://casa.bcodes.info/en" id="default">
+                                </div>
+                                <div class="form-group">
+                                  <label for="pages">Pages</label>
+                                  <select class="form-control" id="pages" name="page">
+                                    @foreach ($pages as $page)
+                                        <option value="{{ $page->slug }}">{{ $page->title }}</option>
+                                    @endforeach
+                                  </select>
+                                  <div class="col-md-12" id="preview">
+
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="blogs">Blogs</label>
+                                    <select class="form-control" id="blogs" name="blog">
+                                      @foreach ($blogs as $blog)
+                                          <option value="{{ $blog->slug }}">{{ $blog->title }}</option>
+                                      @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <!-- /.tab-pane -->
                         </div>
@@ -125,7 +147,29 @@
 
 @section('scripts')
     <script type="text/javascript">
+        function facebookApi() {
+                  FB.api(
+                  '/http://casa.bcodes.info/en',
+                  'GET',
+                  {},
+                  function(response) {
+                    // Insert your code here
+                  }
+                );
+        }
+
         $( document ).ready(function() {
+
+            $.ajaxSetup({ 'cache' : true });
+            $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+            FB.init({
+                appId: '1457912127627531',
+                version: 'v2.10' // or v2.1, v2.2, v2.3, ...
+              });
+            FB.api('/http://casa.bcodes.info', 'GET', {}, function(response){
+              console.log(response);
+            });
+            });
             $(document).keypressAction({
                 actions: [
                     { key: 'c', route: "<?= route('admin.bcseo.seo.create') ?>" }
