@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Modules\Bcseo\Entities\Seo;
 use Modules\Bcseo\Repositories\SeoRepository;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
+use Modules\Page\Entities\Page;
+use Modules\Blog\Entities\Post;
 
 class SeoController extends AdminBaseController
 {
@@ -29,7 +31,8 @@ class SeoController extends AdminBaseController
     public function index()
     {
         //$seos = $this->seo->all();
-
+        $page = new Page;
+        $blog = new Post;
         if(File::exists(public_path().'/robots.txt')){
             $robots = File::get(public_path().'/robots.txt');
         }else{
@@ -41,9 +44,10 @@ class SeoController extends AdminBaseController
         }else{
             $htaccess = '';
         }
+        $pages = $page->all();
+        $blogs = $blog->all();
 
-    
-        return view('bcseo::admin.seos.index', compact('robots','htaccess'));
+        return view('bcseo::admin.seos.index', compact('robots','htaccess','pages','blogs'));
     }
 
     /**
